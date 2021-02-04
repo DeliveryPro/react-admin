@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "app/build",
+    "site": "delivery-27fce",				
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
