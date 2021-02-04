@@ -8,12 +8,12 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    defaults: 
+      run:
+        working-directory: ./app
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-      - name: Go to app
-        run: |
-          cd app
       - name: Install Dependencies
         run: npm install
       - name: Build
