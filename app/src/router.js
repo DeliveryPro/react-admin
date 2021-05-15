@@ -29,6 +29,7 @@ export const bothRoutes = []
 const privateRoutes = [
 	{ path: '/home', children: <Home />, exact: true },
 	{ path: '/support', children: <Home page="SUPPORT" />, exact: true },
+	{ path: '/support/answer/:id', children: <Home page="SUPPORT_ANSWER" />, exact: true },
 	{ path: '/users', children: <Home page="USERS" />, exact: true },
 	{ path: '/map', children: <Home page="MAP" />, exact: true },
 ]

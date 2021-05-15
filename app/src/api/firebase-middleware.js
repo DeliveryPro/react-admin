@@ -54,6 +54,20 @@ class FirebaseApp {
 			.ref(`support`)
 			.once('value')
 			.then((snapshot) => snapshot.val())
+
+	getOneSupportMessage = (id) =>
+		this.firebase
+			.database()
+			.ref(`support/${id}`)
+			.once('value')
+			.then((snapshot) => ({ id, ...snapshot.val() }))
+
+	addAnswer = (id, data) =>
+		this.firebase
+			.database()
+			.ref(`support/${id}`)
+			.update(data)
+			// .then((snapshot) => ({ id, ...snapshot.val() }))
 }
 
 export default app

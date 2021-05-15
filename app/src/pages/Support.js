@@ -9,6 +9,7 @@ import {
 	Typography,
 	TableContainer,
 	Paper,
+	Button,
 } from '@material-ui/core'
 
 import Skeleton from '@material-ui/lab/Skeleton'
@@ -16,6 +17,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import BreadcrumbsContainer from 'components/BreadcrumbsContainer'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { getSupportMessagesAction } from 'redux/actions/support-action'
 import { getAllSupportMessagesSelector, isSupportMessagesLoadingSelector } from 'redux/selectors/support-selector'
 
@@ -25,6 +27,8 @@ const SUPPORT_TABLE_PAGE_FIELDS = {
 	userId: { name: 'User ID', value: 'userId' },
 	name: { name: 'Name', value: 'name' },
 	question: { name: 'Question', value: 'question' },
+	status: { name: 'Status', value: 'status' },
+	answer: { name: 'Answer', value: 'answer' },
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -50,17 +54,20 @@ const SupportContent = () => {
 	const isMessagesLoading = useSelector(isSupportMessagesLoadingSelector)
 
 	const classes = useStyles()
+	const history = useHistory()
 
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		!supportMessages.length && getSupportMessages()
-        //eslint-disable-next-line react-hooks/exhaustive-deps
+		//eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const getSupportMessages = () => {
 		dispatch(getSupportMessagesAction())
 	}
+
+	const toPage = (page) => () => history.push(page)
 
 	return (
 		<Box className={classes.root}>
@@ -98,6 +105,15 @@ const SupportContent = () => {
 												{Object.values(SUPPORT_TABLE_PAGE_FIELDS).map(({ value }) => (
 													<TableCell>{data[value]}</TableCell>
 												))}
+												<TableCell>
+													<Button
+														variant="contained"
+														color="secondary"
+														onClick={toPage('/support/answer/' + id)}
+													>
+														Add an Answer
+													</Button>
+												</TableCell>
 											</TableRow>
 										)
 									})}

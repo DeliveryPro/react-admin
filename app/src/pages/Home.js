@@ -4,13 +4,16 @@ import { useHistory } from 'react-router'
 import Support from 'pages/Support'
 import Users from 'pages/Users'
 import MapComponent from './Map'
+import SupportAnswer from './SupportAnswer'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		display: 'flex',
 		flexDirection: 'row',
+		flexWrap: 'wrap',
+		maxWidth: '100vw',
+		overflowX: 'scroll',
 	},
-	leftMenu: {},
 	listItem: {
 		margin: 10,
 		width: 200,
@@ -28,6 +31,7 @@ const LEFT_MENU = [
 
 const PAGES = {
 	SUPPORT: { name: 'SUPPORT', component: Support },
+    SUPPORT_ANSWER: {name: 'SUPPORT_ANSWER', component: SupportAnswer},
 	HOME: { name: 'HOME', component: null },
 	USERS: { name: 'USERS', component: Users },
 	MAP: { name: 'MAP', component: MapComponent },
