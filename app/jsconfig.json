@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": [
+    "src",
+    "src/utils",
+    "src/redux",
+    "src/redux/actions",
+    "src/redux/selectors",
+    "src/redux/reducers",
+    "src/pages",
+    "src/constants",
+    "src/components"
+  ]
+}
