@@ -1,12 +1,12 @@
-import { auth } from "api";
+// import {  } from "api";
 import { createAction } from "redux-actions";
-import { getAuth, setAuth } from "utils/localstorage-handler";
+// import { getAuth, setAuth } from "utils/localstorage-handler";
 
 import { LOGIN_SUCCESS, LOGIN_START } from "../types";
 
 import { errorHandler } from "./error-action";
-import { notificationsShower } from "redux/actions/notification-action";
-import types from "constants";
+// import { notificationsShower } from "redux/actions/notification-action";
+// import types from "constants";
 import logger from "utils/logger";
 
 export const loginSuccess = createAction(LOGIN_SUCCESS);
@@ -17,11 +17,11 @@ const LOGIN_PAGE = "LOGIN_PAGE";
 export const loginAction = (username, password) => async (dispatch) => {
   logger("loginAction");
   try {
-    const res = await auth.loginFunction(username, { data: { password } });
-    if (res) {
-      dispatch(loginSuccess(res.message));
-      setAuth({ user_id: res.message.user_id, username, password });
-    }
+    // const res = await auth.loginFunction(username, { data: { password } });
+    // if (res) {
+    //   dispatch(loginSuccess(res.message));
+    //   setAuth({ user_id: res.message.user_id, username, password });
+    // }
   } catch (e) {
     dispatch(errorHandler(LOGIN_PAGE, e));
   }

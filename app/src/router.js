@@ -17,7 +17,7 @@ const Login = React.lazy(() =>
 
 const Home = React.lazy(() =>
 	import(
-		/* webpackChunkName: "login page" */
+		/* webpackChunkName: "Home page" */
 		'./pages/Home'
 	),
 )
@@ -27,7 +27,6 @@ export const publicRoutes = [{ path: '/login', children: <Login />, exact: true 
 export const bothRoutes = []
 
 const privateRoutes = [
-	// { path: '/profile', children: <Profile />, exact: true },
 	{ path: '/home', children: <Home />, exact: true },
 	{ path: '/support', children: <Home page="SUPPORT" />, exact: true },
 	{ path: '/users', children: <Home page="USERS" />, exact: true },

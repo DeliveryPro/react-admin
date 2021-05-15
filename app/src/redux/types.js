@@ -1,11 +1,19 @@
 //* Login
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_START = 'LOGIN_START'
 
 //* Error
-export const ERROR = "ERROR";
-export const HIDE_ERROR = "HIDE_ERROR";
+export const ERROR = 'ERROR'
+export const HIDE_ERROR = 'HIDE_ERROR'
 
 //* Notification
-export const NOTIFICATION_SHOW = "NOTIFICATION_SHOW";
-export const NOTIFICATION_HIDE = "NOTIFICATION_HIDE";
+export const NOTIFICATION_SHOW = 'NOTIFICATION_SHOW'
+export const NOTIFICATION_HIDE = 'NOTIFICATION_HIDE'
+
+//* Users
+export const GET_ALL_USER_START = 'GET_ALL_USER_START'
+export const GET_ALL_USER_SUCCESS = 'GET_ALL_USER_SUCCESS'
+
+//* Support
+export const GET_SUPPORT_MESSAGES_START = 'GET_SUPPORT_MESSAGES_START'
+export const GET_SUPPORT_MESSAGES_SUCCESS = 'GET_SUPPORT_MESSAGES_SUCCESS'

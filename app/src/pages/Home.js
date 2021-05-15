@@ -28,8 +28,8 @@ const LEFT_MENU = [
 
 const PAGES = {
 	SUPPORT: { name: 'SUPPORT', component: Support },
-	HOME: { name: 'HOME', component: Support },
-	USERS: { name: 'SUPPORT', component: Users },
+	HOME: { name: 'HOME', component: null },
+	USERS: { name: 'USERS', component: Users },
 	MAP: { name: 'MAP', component: MapComponent },
 }
 
