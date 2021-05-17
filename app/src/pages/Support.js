@@ -111,7 +111,7 @@ const SupportContent = () => {
 														color="secondary"
 														onClick={toPage('/support/answer/' + id)}
 													>
-														Add an Answer
+														{data.answer ? 'See' : 'Add an Answer'}
 													</Button>
 												</TableCell>
 											</TableRow>

@@ -74,53 +74,51 @@ const SupportAnswerContent = () => {
 				<Box className={classes.dataContainer}>
 					<Typography className={classes.textTitle}>Support Question Answer</Typography>
 				</Box>
-				{questionData && (
-					<Box className={classes.dataContainer}>
-						<Box className={classes.textContainer}>
-							<Typography className={classes.boldText}>User:</Typography>
-							{isQuestionLoading ? (
-								<Skeleton className={classes.skeleton} variant="text" />
-							) : (
-								<Typography> {questionData.name}</Typography>
-							)}
-						</Box>
-						<Box className={classes.textContainer}>
-							<Typography className={classes.boldText}>Email:</Typography>
-							{isQuestionLoading ? (
-								<Skeleton className={classes.skeleton} variant="text" />
-							) : (
-								<Typography> {questionData.email}</Typography>
-							)}
-						</Box>
-						<Box className={classes.textContainer}>
-							<Typography className={classes.boldText}>Question status:</Typography>
-							{isQuestionLoading ? (
-								<Skeleton className={classes.skeleton} variant="text" />
-							) : (
-								<Typography> {questionData.status}</Typography>
-							)}
-						</Box>
-						<Box className={classes.textContainer}>
-							<Typography className={classes.boldText}>Question:</Typography>
-							{isQuestionLoading ? (
-								<Skeleton className={classes.skeleton} variant="text" />
-							) : (
-								<Typography> "{questionData.question}"</Typography>
-							)}
-						</Box>
-						{questionData.answer && (
-							<Box className={classes.textContainer}>
-								<Typography className={classes.boldText}>Answer:</Typography>
-								{isQuestionLoading ? (
-									<Skeleton className={classes.skeleton} variant="text" />
-								) : (
-									<Typography> "{questionData.answer}"</Typography>
-								)}
-							</Box>
+				<Box className={classes.dataContainer}>
+					<Box className={classes.textContainer}>
+						<Typography className={classes.boldText}>User:</Typography>
+						{isQuestionLoading ? (
+							<Skeleton className={classes.skeleton} variant="text" />
+						) : (
+							<Typography> {questionData?.name}</Typography>
 						)}
 					</Box>
-				)}
-				{!questionData.answer && (
+					<Box className={classes.textContainer}>
+						<Typography className={classes.boldText}>Email:</Typography>
+						{isQuestionLoading ? (
+							<Skeleton className={classes.skeleton} variant="text" />
+						) : (
+							<Typography> {questionData?.email}</Typography>
+						)}
+					</Box>
+					<Box className={classes.textContainer}>
+						<Typography className={classes.boldText}>Question status:</Typography>
+						{isQuestionLoading ? (
+							<Skeleton className={classes.skeleton} variant="text" />
+						) : (
+							<Typography> {questionData?.status}</Typography>
+						)}
+					</Box>
+					<Box className={classes.textContainer}>
+						<Typography className={classes.boldText}>Question:</Typography>
+						{isQuestionLoading ? (
+							<Skeleton className={classes.skeleton} variant="text" />
+						) : (
+							<Typography> "{questionData?.question}"</Typography>
+						)}
+					</Box>
+					{questionData?.answer && (
+						<Box className={classes.textContainer}>
+							<Typography className={classes.boldText}>Answer:</Typography>
+							{isQuestionLoading ? (
+								<Skeleton className={classes.skeleton} variant="text" />
+							) : (
+								<Typography> "{questionData?.answer}"</Typography>
+							)}
+						</Box>
+					)}
+				</Box>
+				{!questionData?.answer && (
 					<Box className={classes.dataContainer}>
 						<TextField multiline type="text" variant="outlined" label="Answer" onChange={onChange} />
 						<Button

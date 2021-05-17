@@ -39,7 +39,6 @@ export const getOneSupportMessageAction = (id) => async (dispatch) => {
 	dispatch(getOneSupportMessageStart())
 	try {
 		const res = await firebaseApp.getOneSupportMessage(id)
-		console.log('res => ', res)
 		if (res) {
 			dispatch(getOneSupportMessageSuccess(res))
 		}
@@ -53,7 +52,6 @@ export const updateAnswerAction = (id, data) => async (dispatch) => {
 	dispatch(getOneSupportMessageStart())
 	try {
 		const res = await firebaseApp.addAnswer(id, data)
-		console.log('res => ', res)
 		if (res) {
 			dispatch(getOneSupportMessageSuccess(res))
 		}
