@@ -3,8 +3,9 @@ import { Box, List, ListItem, makeStyles, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router'
 import Support from 'pages/Support'
 import Users from 'pages/Users'
-import MapComponent from './Map'
-import SupportAnswer from './SupportAnswer'
+import MapComponent from 'pages/Map'
+import SupportAnswer from 'pages/SupportAnswer'
+import AddUser from 'pages/AddUser'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -35,6 +36,7 @@ const PAGES = {
 	HOME: { name: 'HOME', component: null },
 	USERS: { name: 'USERS', component: Users },
 	MAP: { name: 'MAP', component: MapComponent },
+    NEW_USER: {name: 'NEW_USER', component: AddUser}
 }
 
 const Home = ({ page = 'HOME' }) => {
