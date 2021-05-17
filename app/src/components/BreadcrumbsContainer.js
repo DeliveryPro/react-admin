@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	defaultBreadcrumb: {
 		fontSize: 16,
+		cursor: 'pointer',
 	},
 	activeBreadcrumb: {
 		color: theme.primary,
-		cursor: 'pointer',
 	},
 	breadcrumbs: {
 		padding: theme.spacing(1),

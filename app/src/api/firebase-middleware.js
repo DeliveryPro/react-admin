@@ -4,10 +4,6 @@ import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/messaging'
 
-// import uuid from 'uuidv4'
-
-// import logger from 'js/utils/logger'
-
 // const {
 // 	REACT_APP_API_KEY,
 // 	REACT_APP_AUTH_DOMAIN,
@@ -36,40 +32,5 @@ const config = {
 
 app.initializeApp(config)
 
-class FirebaseApp {
-	constructor(firebase) {
-		this.firebase = firebase
-	}
-
-	getUsers = () =>
-		this.firebase
-			.database()
-			.ref(`users`)
-			.once('value')
-			.then((snapshot) => snapshot.val())
-
-	getSupportMessages = () =>
-		this.firebase
-			.database()
-			.ref(`support`)
-			.once('value')
-			.then((snapshot) => snapshot.val())
-
-	getOneSupportMessage = (id) =>
-		this.firebase
-			.database()
-			.ref(`support/${id}`)
-			.once('value')
-			.then((snapshot) => ({ id, ...snapshot.val() }))
-
-	addAnswer = (id, data) =>
-		this.firebase
-			.database()
-			.ref(`support/${id}`)
-			.update(data)
-			// .then((snapshot) => ({ id, ...snapshot.val() }))
-}
 
 export default app
-
-export const Firebase = new FirebaseApp(app)

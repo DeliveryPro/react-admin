@@ -1,3 +1,4 @@
-import {Firebase as firebaseApp} from './firebase-middleware'
+import Support from './firebase-support'
+import Users from './firebase-users'
 
-export { firebaseApp }
+export { Support, Users }

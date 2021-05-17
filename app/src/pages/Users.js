@@ -9,18 +9,21 @@ import {
 	Typography,
 	TableContainer,
 	Paper,
+	Button,
 } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 
 import BreadcrumbsContainer from 'components/BreadcrumbsContainer'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { getAllUsersAction } from 'redux/actions/user-action'
 import { getAllUsersSelector, isUsersLoadingSelector } from 'redux/selectors/user-selector'
 
 const USERS_TABLE_PAGE_FIELDS = {
 	id: { name: 'Id', value: 'id' },
 	email: { name: 'Email', value: 'email' },
+	role: { name: 'Role', value: 'role' },
 	name: { name: 'Name', value: 'givenName' },
 	familyName: { name: 'Family Name', value: 'familyName' },
 	photo: { name: 'Photo', value: 'photo' },
@@ -42,11 +45,18 @@ const useStyles = makeStyles((theme) => ({
 	userImage: {
 		width: 40,
 	},
+	titleContainer: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
 }))
 
 const UsersContent = () => {
 	const users = useSelector(getAllUsersSelector)
 	const isUsersLoading = useSelector(isUsersLoadingSelector)
+
+	const history = useHistory()
 
 	const classes = useStyles()
 
@@ -61,10 +71,19 @@ const UsersContent = () => {
 		dispatch(getAllUsersAction())
 	}
 
+	const toPage = (page) => () => history.push(page)
+
+	console.log(`users`, users)
+
 	return (
 		<Box className={classes.root}>
 			<TableContainer className={classes.container} component={Paper}>
-				<Typography className={classes.titleText}>Users</Typography>
+				<Box className={classes.titleContainer}>
+					<Typography className={classes.titleText}>Users</Typography>
+					<Button variant="contained" color="primary" onClick={toPage('/users/new')}>
+						Add a new user
+					</Button>
+				</Box>
 
 				<Table>
 					<TableHead>
@@ -92,17 +111,24 @@ const UsersContent = () => {
 								{users &&
 									Object.keys(users)?.map((id) => {
 										const data = users[id]
+										console.log(`data`, data)
 										return (
 											<TableRow>
+												<TableCell>{id}</TableCell>
 												{Object.values(USERS_TABLE_PAGE_FIELDS).map(({ value }) => {
+													if (value === 'id') return null
 													if (value === 'photo') {
 														return (
 															<TableCell>
-																<img
-																	alt={'user' + id}
-																	className={classes.userImage}
-																	src={data[value]}
-																/>
+																{data[value] ? (
+																	<img
+																		alt={'user' + id}
+																		className={classes.userImage}
+																		src={data[value]}
+																	/>
+																) : (
+																	'none'
+																)}
 															</TableCell>
 														)
 													}

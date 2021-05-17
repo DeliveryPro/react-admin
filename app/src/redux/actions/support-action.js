@@ -1,4 +1,4 @@
-import { firebaseApp } from 'api'
+import { Support } from 'api'
 import { createAction } from 'redux-actions'
 import logger from 'utils/logger'
 
@@ -19,8 +19,7 @@ export const getSupportMessagesAction = () => async (dispatch) => {
 	logger('getSupportMessagesAction')
 	dispatch(getSupportMessagesStart())
 	try {
-		const res = await firebaseApp.getSupportMessages()
-		console.log('res => ', res)
+		const res = await Support.getSupportMessages()
 		if (res) {
 			dispatch(getSupportMessagesSuccess(res))
 		}
@@ -38,7 +37,7 @@ export const getOneSupportMessageAction = (id) => async (dispatch) => {
 	logger('getOneSupportMessage', id)
 	dispatch(getOneSupportMessageStart())
 	try {
-		const res = await firebaseApp.getOneSupportMessage(id)
+		const res = await Support.getOneSupportMessage(id)
 		if (res) {
 			dispatch(getOneSupportMessageSuccess(res))
 		}
@@ -51,7 +50,7 @@ export const updateAnswerAction = (id, data) => async (dispatch) => {
 	logger('updateAnswerAction', id)
 	dispatch(getOneSupportMessageStart())
 	try {
-		const res = await firebaseApp.addAnswer(id, data)
+		const res = await Support.addAnswer(id, data)
 		if (res) {
 			dispatch(getOneSupportMessageSuccess(res))
 		}
