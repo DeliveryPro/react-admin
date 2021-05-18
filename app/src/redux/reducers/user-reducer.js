@@ -5,12 +5,18 @@ import {
 	getAllUsersStart,
 	createNewUserActionStart,
 	createNewUserActionSuccess,
+	sendNewCredentialsStart,
+	sendNewCredentialsSuccess,
+	getUserDataStart,
+	getUserDataSuccess,
 } from 'redux/actions/user-action'
 
 const defaultState = {
 	users: {},
 	loading: false,
 	isUserLoading: false,
+	isCredentialSending: false,
+	user: {},
 }
 
 const notificationReducer = handleActions(
@@ -31,6 +37,23 @@ const notificationReducer = handleActions(
 		[createNewUserActionStart]: (state) => ({
 			...state,
 			isUserLoading: true,
+		}),
+		[sendNewCredentialsStart]: (state) => ({
+			...state,
+			isCredentialSending: true,
+		}),
+		[sendNewCredentialsSuccess]: (state) => ({
+			...state,
+			isCredentialSending: false,
+		}),
+		[getUserDataStart]: (state) => ({
+			...state,
+			isUserLoading: true,
+		}),
+		[getUserDataSuccess]: (state, { payload }) => ({
+			...state,
+			isUserLoading: false,
+			user: payload || {},
 		}),
 	},
 	defaultState,

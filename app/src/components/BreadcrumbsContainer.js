@@ -36,6 +36,7 @@ const BreadcrumbsContainer = ({ component }) => {
 
 			return (
 				<Typography
+					key={name}
 					className={index === links.length - 1 ? classes.activeBreadcrumb : classes.defaultBreadcrumb}
 					onClick={index === links.length - 1 ? null : toPage(link)}
 				>

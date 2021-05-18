@@ -12,8 +12,18 @@ class UsersApi {
 			.once('value')
 			.then((snapshot) => snapshot.val())
 
-	addNew = (data) => this.firebase.database().ref(`users`).push({ ...data })
-	// .then((snapshot) => snapshot.val())
+	getUser = (userId) =>
+		this.firebase
+			.database()
+			.ref(`users/${userId}`)
+			.once('value')
+			.then((snapshot) => snapshot.val())
+
+	addNew = (data) =>
+		this.firebase
+			.database()
+			.ref(`users`)
+			.push({ ...data })
 }
 
 export default new UsersApi(app)

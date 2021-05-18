@@ -1,11 +1,10 @@
 import axios from 'axios'
-import { clearAuth } from 'utils/localStorageHandler.js'
-import logger from '/utils/logger.js'
-
-const authApiUrl = process.env.REACT_APP_AUTH_API_URL
+// import { clearAuth } from 'utils/localStorageHandler.js'
+import logger from 'utils/logger.js'
+import qs from 'qs'
 
 const config = {
-	baseURL: authApiUrl,
+	baseURL: process.env.REACT_APP_FIREBASE_FUNCTIONS_HOST,
 }
 
 const axiosInstance = axios.create(config)
@@ -45,7 +44,7 @@ export const GET = async (link, filters = {}) => {
 
 export const POST = async (link, data = {}) => {
 	try {
-		const res = await axiosInstance.post(link, data)
+		const res = await axiosInstance.post(link, qs.stringify(data))
 
 		if (res?.status === 200) {
 			return res.data
@@ -58,6 +57,7 @@ export const POST = async (link, data = {}) => {
 
 export const PATCH = async (link, data = {}) => {
 	try {
+		console.log(`axiosInstance, config`, axiosInstance, config)
 		const res = await axiosInstance.patch(link, data)
 
 		if (res?.status === 200) {
@@ -74,7 +74,7 @@ export const DELETE = async (link, data = {}) => {
 		const res = await axiosInstance.delete(link, { data })
 
 		if (res?.status === 204) {
-			clearAuth()
+			// clearAuth()
 			window.location.reload()
 			return res.data
 		}

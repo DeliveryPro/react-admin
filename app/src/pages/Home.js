@@ -6,6 +6,7 @@ import Users from 'pages/Users'
 import MapComponent from 'pages/Map'
 import SupportAnswer from 'pages/SupportAnswer'
 import AddUser from 'pages/AddUser'
+import User from 'pages/User'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -32,11 +33,12 @@ const LEFT_MENU = [
 
 const PAGES = {
 	SUPPORT: { name: 'SUPPORT', component: Support },
-    SUPPORT_ANSWER: {name: 'SUPPORT_ANSWER', component: SupportAnswer},
+	SUPPORT_ANSWER: { name: 'SUPPORT_ANSWER', component: SupportAnswer },
 	HOME: { name: 'HOME', component: null },
 	USERS: { name: 'USERS', component: Users },
 	MAP: { name: 'MAP', component: MapComponent },
-    NEW_USER: {name: 'NEW_USER', component: AddUser}
+	NEW_USER: { name: 'NEW_USER', component: AddUser },
+	USER: { name: 'USER', component: User },
 }
 
 const Home = ({ page = 'HOME' }) => {
@@ -51,7 +53,7 @@ const Home = ({ page = 'HOME' }) => {
 				<List>
 					{LEFT_MENU.map(({ name, link }) => {
 						return (
-							<ListItem className={classes.listItem} button onClick={toPage(link)}>
+							<ListItem key={name + link} className={classes.listItem} button onClick={toPage(link)}>
 								<Typography>{name}</Typography>
 							</ListItem>
 						)
