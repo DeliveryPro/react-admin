@@ -65,7 +65,7 @@ const SupportAnswerContent = () => {
 		setAnswer(value)
 	}
 	const onSubmitAnswer = () => {
-		dispatch(updateAnswerAction(questionId, { ...questionData, answer, status: 'answered' }))
+		dispatch(updateAnswerAction({ ...questionData, answer, status: 'answered', questionId }))
 	}
 
 	return (

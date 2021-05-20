@@ -6,7 +6,6 @@ import { useHistory } from 'react-router'
 import { getUserDataAction, sendNewCredentialsAction } from 'redux/actions/user-action'
 import { isUserDataLoadingSelector, userDataSelector } from 'redux/selectors/user-selector'
 import Skeleton from '@material-ui/lab/Skeleton'
-import generatePassword from 'password-generator'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -111,13 +110,7 @@ const UserContent = () => {
 	}, [])
 
 	const sendNewPassword = () => {
-		const password = generatePassword(8)
-		const message = {
-			receiver: userData.email,
-			subject: 'Password restoration',
-			message: `Hi, ${userData.name}! \n Your password has been changed to ${password} \n If you are not changed your password, contact with administrator`,
-		}
-		dispatch(sendNewCredentialsAction(message))
+		dispatch(sendNewCredentialsAction({ userId, receiver: userData.email, name: userData.name }))
 	}
 
 	const toPage = (page) => () => history.push(page)

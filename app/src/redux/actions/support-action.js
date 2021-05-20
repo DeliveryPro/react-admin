@@ -1,4 +1,4 @@
-import { Support } from 'api'
+import { Support, ExternalApi } from 'api'
 import { createAction } from 'redux-actions'
 import logger from 'utils/logger'
 
@@ -46,11 +46,11 @@ export const getOneSupportMessageAction = (id) => async (dispatch) => {
 	}
 }
 
-export const updateAnswerAction = (id, data) => async (dispatch) => {
-	logger('updateAnswerAction', id)
+export const updateAnswerAction = (data) => async (dispatch) => {
+	logger('updateAnswerAction')
 	dispatch(getOneSupportMessageStart())
 	try {
-		const res = await Support.addAnswer(id, data)
+		const res = await ExternalApi.addAnswer(data)
 		if (res) {
 			dispatch(getOneSupportMessageSuccess(res))
 		}

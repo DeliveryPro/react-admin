@@ -24,6 +24,8 @@ class UsersApi {
 			.database()
 			.ref(`users`)
 			.push({ ...data })
+
+	updateUser = (userId, data) => this.firebase.database().ref(`users`).child(userId).update(data)
 }
 
 export default new UsersApi(app)

@@ -38,6 +38,7 @@ const PAGES = {
 	USERS: { name: 'USERS', component: Users },
 	MAP: { name: 'MAP', component: MapComponent },
 	NEW_USER: { name: 'NEW_USER', component: AddUser },
+	EDIT_USER: { name: 'EDIT_USER', component: AddUser },
 	USER: { name: 'USER', component: User },
 }
 
