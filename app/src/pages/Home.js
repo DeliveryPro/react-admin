@@ -7,6 +7,7 @@ import MapComponent from 'pages/Map'
 import SupportAnswer from 'pages/SupportAnswer'
 import AddUser from 'pages/AddUser'
 import User from 'pages/User'
+import Packages from 'pages/Packages'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -29,6 +30,7 @@ const LEFT_MENU = [
 	{ name: 'Support', link: '/support' },
 	{ name: 'Users', link: '/users' },
 	{ name: 'Map', link: '/map' },
+	{ name: 'Packages', link: '/packages' },
 ]
 
 const PAGES = {
@@ -40,6 +42,7 @@ const PAGES = {
 	NEW_USER: { name: 'NEW_USER', component: AddUser },
 	EDIT_USER: { name: 'EDIT_USER', component: AddUser },
 	USER: { name: 'USER', component: User },
+	PACKAGES: { name: 'PACKAGES', component: Packages },
 }
 
 const Home = ({ page = 'HOME' }) => {

@@ -17,20 +17,18 @@ import BreadcrumbsContainer from 'components/BreadcrumbsContainer'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { getAllUsersAction } from 'redux/actions/user-action'
-import {
-	getAllUsersSelector,
-	isNewCredentialSendingSelector,
-	isUsersLoadingSelector,
-} from 'redux/selectors/user-selector'
+import { getAllPackagesAction } from 'redux/actions/packages-action'
+import { getAllPackagesSelector, isPackagesLoadingSelector } from 'redux/selectors/packages-selector'
+
 
 const USERS_TABLE_PAGE_FIELDS = {
 	id: { name: 'Id', value: 'id' },
-	email: { name: 'Email', value: 'email' },
-	role: { name: 'Role', value: 'role' },
-	name: { name: 'Name', value: 'givenName' },
-	familyName: { name: 'Family Name', value: 'familyName' },
-	photo: { name: 'Photo', value: 'photo' },
+	senderId: { name: 'Sender UID', value: 'sender_uid' },
+	receiverId: { name: 'Receiver UID', value: 'receiver_uid' },
+	date: { name: 'Date Creation', value: 'date' },
+	addressFrom: { name: 'Address From', value: 'address_from' },
+	addressTo: { name: 'Address To', value: 'address_to' },
+	status: { name: 'Status', value: 'status' },
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -56,10 +54,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-const UsersContent = () => {
-	const users = useSelector(getAllUsersSelector)
-	const isUsersLoading = useSelector(isUsersLoadingSelector)
-	const isNewCredentialSending = useSelector(isNewCredentialSendingSelector)
+const PackagesContent = () => {
+	const packages = useSelector(getAllPackagesSelector)
+	const isPackagesLoading = useSelector(isPackagesLoadingSelector)
 
 	const history = useHistory()
 
@@ -68,28 +65,21 @@ const UsersContent = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		!users.length && getUsers()
+		!packages.length && getPackages()
 		//eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	useEffect(() => {}, [isNewCredentialSending])
-
-	const getUsers = () => {
-		dispatch(getAllUsersAction())
+	const getPackages = () => {
+		dispatch(getAllPackagesAction())
 	}
 
 	const toPage = (page) => () => history.push(page)
-
-	console.log(`users`, users)
 
 	return (
 		<Box className={classes.root}>
 			<TableContainer className={classes.container} component={Paper}>
 				<Box className={classes.titleContainer}>
-					<Typography className={classes.titleText}>Users</Typography>
-					<Button variant="contained" color="primary" onClick={toPage('/users/new')}>
-						Add a new user
-					</Button>
+					<Typography className={classes.titleText}>Packages</Typography>
 				</Box>
 
 				<Table>
@@ -101,7 +91,7 @@ const UsersContent = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{isUsersLoading ? (
+						{isPackagesLoading ? (
 							<>
 								{[0, 1, 2, 3, 4].map(() => (
 									<TableRow>
@@ -115,32 +105,23 @@ const UsersContent = () => {
 							</>
 						) : (
 							<>
-								{users &&
-									Object.keys(users)?.map((id) => {
-										const data = users[id]
+								{packages &&
+									Object.keys(packages)?.map((id) => {
+										const data = packages[id]
 										return (
 											<TableRow key={'row' + id}>
-												<TableCell key={'userId' + id}>{id}</TableCell>
+												<TableCell key={'packageId' + id}>{id}</TableCell>
 												{Object.values(USERS_TABLE_PAGE_FIELDS).map(({ value }) => {
 													if (value === 'id') return null
-													if (value === 'photo') {
+													if (value === 'address_from' || value === 'address_to')
 														return (
-															<TableCell key={'photo' + id}>
-																{data[value] ? (
-																	<img
-																		alt={'user' + id}
-																		className={classes.userImage}
-																		src={data[value]}
-																	/>
-																) : (
-																	'none'
-																)}
+															<TableCell key={value+id} >
+																{data[value].details.vicinity}
 															</TableCell>
 														)
-													}
 													return (
-														<TableCell key={users[id][value] + id}>
-															{users[id][value]}
+														<TableCell key={data[value] + id}>
+															{data[value]}
 														</TableCell>
 													)
 												})}
@@ -148,7 +129,7 @@ const UsersContent = () => {
 													<Button
 														variant="contained"
 														color="primary"
-														onClick={toPage(`/users/${id}`)}
+														onClick={toPage(`/packages/${id}`)}
 													>
 														View
 													</Button>
@@ -165,6 +146,6 @@ const UsersContent = () => {
 	)
 }
 
-const Users = () => <BreadcrumbsContainer component={<UsersContent />} />
+const Packages = () => <BreadcrumbsContainer component={<PackagesContent />} />
 
-export default Users
+export default Packages

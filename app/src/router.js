@@ -30,11 +30,16 @@ const privateRoutes = [
 	{ path: '/home', children: <Home />, exact: true },
 	{ path: '/support', children: <Home page="SUPPORT" />, exact: true },
 	{ path: '/support/answer/:id', children: <Home page="SUPPORT_ANSWER" />, exact: true },
+
 	{ path: '/users', children: <Home page="USERS" />, exact: true },
 	{ path: '/users/new', children: <Home page="NEW_USER" />, exact: true },
 	{ path: '/users/edit/:id', children: <Home page="EDIT_USER" />, exact: true },
 	{ path: '/users/:id', children: <Home page="USER" />, exact: true },
+
 	{ path: '/map', children: <Home page="MAP" />, exact: true },
+
+	{ path: '/packages', children: <Home page="PACKAGES" />, exact: true },
+
 ]
 
 const publicRedirectRoutes = privateRoutes.map(({ path, exact }) => ({
