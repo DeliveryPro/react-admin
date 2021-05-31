@@ -31,6 +31,7 @@ const USERS_TABLE_PAGE_FIELDS = {
 	name: { name: 'Name', value: 'givenName' },
 	familyName: { name: 'Family Name', value: 'familyName' },
 	photo: { name: 'Photo', value: 'photo' },
+	phone: { name: 'Phone', value: 'phone' },
 }
 
 const useStyles = makeStyles((theme) => ({

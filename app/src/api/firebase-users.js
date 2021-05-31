@@ -19,12 +19,6 @@ class UsersApi {
 			.once('value')
 			.then((snapshot) => snapshot.val())
 
-	addNew = (data) =>
-		this.firebase
-			.database()
-			.ref(`users`)
-			.push({ ...data })
-
 	updateUser = (userId, data) => this.firebase.database().ref(`users`).child(userId).update(data)
 }
 

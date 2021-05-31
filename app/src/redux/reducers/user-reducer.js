@@ -33,7 +33,11 @@ const notificationReducer = handleActions(
 		}),
 		[createNewUserActionSuccess]: (state, { payload }) => ({
 			...state,
-			...payload,
+			message: payload.message,
+			user: {
+				uid: payload.uid,
+				success: true,
+			},
 			isUserLoading: false,
 		}),
 		[createNewUserActionStart]: (state) => ({

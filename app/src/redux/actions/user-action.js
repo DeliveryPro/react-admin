@@ -43,7 +43,7 @@ export const createNewUserAction = (data) => async (dispatch) => {
 	logger('createNewUserAction')
 	dispatch(createNewUserActionStart())
 	try {
-		const res = await Users.addNew(data)
+		const res = await ExternalApi.registerUser(data)
 		console.log('res => ', res)
 		if (res) {
 			dispatch(createNewUserActionSuccess(res))

@@ -13,8 +13,14 @@ import {
 	Typography,
 } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { createNewUserAction, getUserDataAction, updateUserAction } from 'redux/actions/user-action'
+import {
+	createNewUserAction,
+	getUserDataAction,
+	sendNewCredentialsAction,
+	updateUserAction,
+} from 'redux/actions/user-action'
 import { userDataSelector } from 'redux/selectors/user-selector'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -72,13 +78,17 @@ const AddUserContent = () => {
 	const classes = useStyles()
 	const dispatch = useDispatch()
 
+	const history = useHistory()
+
 	const location = window.location.pathname
-	const userId = location.split('/')[location.split('/').length - 1]
+	const userId =
+		location.split('/')[location.split('/').length - 1] === 'new'
+			? null
+			: location.split('/')[location.split('/').length - 1]
 
 	const PAGE_TITLE = userId ? 'Edit User Data' : 'Add New User'
 
 	const userData = useSelector(userDataSelector)
-	// const isUserLoading = useSelector(isUserDataLoadingSelector)
 
 	useEffect(() => {
 		if (userId) dispatch(getUserDataAction(userId))
@@ -86,9 +96,25 @@ const AddUserContent = () => {
 	}, [userId])
 
 	useEffect(() => {
-		if (userData) setData({ ID: userId, ...userData })
+		if (userData) setData({ [ADD_NEW_USER_FIELDS.ID.name]: userId, ...userData })
 		//eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userData])
+
+	const toPage = (page) => history.push(page)
+
+	useEffect(() => {
+		if (userData.uid) {
+			dispatch(
+				sendNewCredentialsAction({
+					userId: userData.uid,
+					receiver: data[ADD_NEW_USER_FIELDS.EMAIL.name],
+					name: data[ADD_NEW_USER_FIELDS.NAME.name],
+				}),
+			)
+			toPage('/users')
+		}
+		//eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userData.uid, userData.success])
 
 	const onChange =
 		(type) =>
@@ -99,10 +125,12 @@ const AddUserContent = () => {
 		}
 
 	const onSubmit = () => {
-		userId ? dispatch(updateUserAction(userId, data)) : dispatch(createNewUserAction(data))
+		if (!userId) {
+			dispatch(createNewUserAction({ email: data[ADD_NEW_USER_FIELDS.EMAIL.name], adminRegisterData: data }))
+			return
+		}
+		dispatch(updateUserAction(userId, data))
 	}
-
-	console.log(`data`, data)
 
 	return (
 		<Box className={classes.root}>
