@@ -6,6 +6,7 @@ import notification from 'redux/reducers/notification-reducer'
 import user from 'redux/reducers/user-reducer'
 import support from 'redux/reducers/support-reducer'
 import packages from 'redux/reducers/packages-reducer'
+import map from 'redux/reducers/map-reducer'
 
 export default combineReducers({
 	auth,
@@ -14,4 +15,5 @@ export default combineReducers({
 	user,
 	support,
 	packages,
+	map,
 })
